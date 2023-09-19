@@ -7,7 +7,7 @@ USER_ID = sys.argv[1]
 USER_PW = sys.argv[2]
 
 # 구매 개수를 설정
-COUNT = 5
+COUNT = 2
 
 def run(playwright: Playwright) -> None:
 
@@ -67,7 +67,11 @@ try:
     # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
 except Exception as e:
-    page.click("text=닫기") # 구매한도 넘었을때, 닫기 버튼
+    # 구매한도 넘었을때, 닫기 버튼
+    page.click("text=닫기")
+    context.close()
+    browser.close()
+    return
     
     # Click input[name="closeLayer"]
     page.click("input[name=\"closeLayer\"]")
