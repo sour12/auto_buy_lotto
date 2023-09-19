@@ -7,7 +7,7 @@ USER_ID = sys.argv[1]
 USER_PW = sys.argv[2]
 
 # 구매 개수를 설정
-COUNT = 2
+COUNT = 1
 
 def run(playwright: Playwright) -> None:
 
