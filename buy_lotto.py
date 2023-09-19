@@ -71,7 +71,7 @@ except Exception as e:
     page.click("text=닫기")
     context.close()
     browser.close()
-    return
+    sys.exit()
     
     # Click input[name="closeLayer"]
     page.click("input[name=\"closeLayer\"]")
