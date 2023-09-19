@@ -66,17 +66,16 @@ def run(playwright: Playwright) -> None:
     # Click input:has-text("구매하기")
     page.click("input:has-text(\"구매하기\")")
 
-try:
     time.sleep(2)
     # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
 
+try:
     # Click input[name="closeLayer"]
     page.click("input[name=\"closeLayer\"]")
     # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
 except Exception as e:
     print("구매한도 초과")
-    sys.exit()
 
     # ---------------------
     context.close()
