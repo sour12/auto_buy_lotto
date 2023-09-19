@@ -18,7 +18,7 @@ def run(playwright: Playwright) -> None:
     # Open new page
     page = context.new_page()
 
-    # 로그아웃 (이전에 로그인된 ID logout)
+    # 로그아웃 (이전 로그인정보 logout)
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
     time.sleep(2)
 
