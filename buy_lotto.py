@@ -18,6 +18,10 @@ def run(playwright: Playwright) -> None:
     # Open new page
     page = context.new_page()
 
+    # 로그아웃 (다음 유저를 위하여)
+    page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
+    time.sleep(2)
+
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
 
@@ -73,9 +77,6 @@ try:
 except Exception as e:
     print("구매한도 초과")
     sys.exit()
-
-    # 로그아웃 (다음 유저를 위하여)
-    page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
 
     # ---------------------
     context.close()
