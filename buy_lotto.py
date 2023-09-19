@@ -72,6 +72,7 @@ try:
     # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
 except Exception as e:
     print("구매한도 초과")
+    sys.exit()
     
     # ---------------------
     context.close()
