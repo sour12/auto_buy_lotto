@@ -67,12 +67,15 @@ def run(playwright: Playwright) -> None:
     page.click("text=확인 취소 >> input[type=\"button\"]")
 
 try:
+    # 구매한도 넘었을때, 닫기 버튼
+    time.sleep(2)
+    page.click("text=닫기")
+except Exception as e:
+    print("구매한도 초과")
+    
     # Click input[name="closeLayer"]
     page.click("input[name=\"closeLayer\"]")
     # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
-except Exception as e:
-    # 구매한도 넘었을때, 닫기 버튼
-    page.click("text=닫기")
     
     # ---------------------
     context.close()
