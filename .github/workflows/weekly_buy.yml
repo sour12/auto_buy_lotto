@@ -4,8 +4,6 @@
 name: Python package
 
 on:
-  push:
-    branches: [ "main" ]  
   schedule:
     - cron: '0 23 * * 3' # UST 23:00(수) > KST 08:00(목)  
     - cron: '0 23 * * 5' # UST 23:00(금) > KST 08:00(토)
