@@ -20,7 +20,6 @@ def lotton_prediction():
             break
         num+=1
 
-    # 1회차부터 현재차수까지 당첨번호 크롤링
     print("로또 번호 크롤링 ...")
     count_num = {key: 0 for key in range(1, 46)}
     count_bonus = {key: 0 for key in range(1, 46)}
@@ -56,36 +55,18 @@ def manual_select(page, num_arr):
     page.click("text=확인")
 
 def run(playwright: Playwright) -> None:
-    # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
-
-    # Open new page
     page = context.new_page()
 
-    # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
-    
-    # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
-
-    # Fill [placeholder="아이디"]
     page.fill("[placeholder=\"아이디\"]", USER_ID)
-
-    # Press Tab
     page.press("[placeholder=\"아이디\"]", "Tab")
-
-    # Fill [placeholder="비밀번호"]
     page.fill("[placeholder=\"비밀번호\"]", USER_PW)
-
-    # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
-
-    # Press Enter
-    # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
     with page.expect_navigation():
         page.press("form[name=\"jform\"] >> text=로그인", "Enter")
-
     time.sleep(5)
 
     page.goto(url="https://ol.dhlottery.co.kr/olotto/game/game645.do")    
@@ -110,23 +91,15 @@ def run(playwright: Playwright) -> None:
         page.select_option("select", str(5))
         page.click("text=확인")
 
-    # Click input:has-text("구매하기")
     page.click("input:has-text(\"구매하기\")")
-
     time.sleep(2)
-    # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
-
     try:
-        # Click input[name="closeLayer"]
         page.click("input[name=\"closeLayer\"]")
-        # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
     except:
         print("(예외처리) 구매한도초과 팝업에서 closeLayer 버튼 없음")
 
-    # 로그아웃
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
-
     context.close()
     browser.close()
 
