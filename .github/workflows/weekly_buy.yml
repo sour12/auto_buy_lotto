@@ -55,4 +55,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: logs
-        path: s1.png s2.png
+        path: s2.png
