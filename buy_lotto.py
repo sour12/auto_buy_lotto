@@ -40,44 +40,47 @@ def run(playwright: Playwright) -> None:
     page.press("[placeholder=\"비밀번호\"]", "Tab")
     page.screenshot(path=date_str + "_2.png")
 
-    # Press Enter
-    # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
-    with page.expect_navigation():
-        page.press("form[name=\"jform\"] >> text=로그인", "Enter")
-
-    time.sleep(5)
-
-    page.goto(url="https://ol.dhlottery.co.kr/olotto/game/game645.do")    
-    # "비정상적인 방법으로 접속하였습니다. 정상적인 PC 환경에서 접속하여 주시기 바랍니다." 우회하기
-    page.locator("#popupLayerAlert").get_by_role("button", name="확인").click()
-    print(page.content())
-    page.screenshot(path=date_str + "_3.png")
-
-    # Click text=자동번호발급
-    page.click("text=자동번호발급")
-    #page.click('#num2 >> text=자동번호발급')
-
-    # 구매할 개수를 선택
-    # Select 1
-    page.select_option("select", str(COUNT))
-
-    # Click text=확인
-    page.click("text=확인")
-
-    # Click input:has-text("구매하기")
-    page.click("input:has-text(\"구매하기\")")
-
-    time.sleep(2)
-    # Click text=확인 취소 >> input[type="button"]
-    page.click("text=확인 취소 >> input[type=\"button\"]")
-    page.screenshot(path=date_str + "_4.png")
-
     try:
-        # Click input[name="closeLayer"]
-        page.click("input[name=\"closeLayer\"]")
-        # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
+        # Press Enter
+        # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
+        with page.expect_navigation():
+            page.press("form[name=\"jform\"] >> text=로그인", "Enter")
+    
+        time.sleep(5)
+    
+        page.goto(url="https://ol.dhlottery.co.kr/olotto/game/game645.do")    
+        # "비정상적인 방법으로 접속하였습니다. 정상적인 PC 환경에서 접속하여 주시기 바랍니다." 우회하기
+        page.locator("#popupLayerAlert").get_by_role("button", name="확인").click()
+        print(page.content())
+        page.screenshot(path=date_str + "_3.png")
+    
+        # Click text=자동번호발급
+        page.click("text=자동번호발급")
+        #page.click('#num2 >> text=자동번호발급')
+    
+        # 구매할 개수를 선택
+        # Select 1
+        page.select_option("select", str(COUNT))
+    
+        # Click text=확인
+        page.click("text=확인")
+    
+        # Click input:has-text("구매하기")
+        page.click("input:has-text(\"구매하기\")")
+    
+        time.sleep(2)
+        # Click text=확인 취소 >> input[type="button"]
+        page.click("text=확인 취소 >> input[type=\"button\"]")
+        page.screenshot(path=date_str + "_4.png")
+    
+        try:
+            # Click input[name="closeLayer"]
+            page.click("input[name=\"closeLayer\"]")
+            # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
+        except:
+            print("(예외처리) 구매한도초과 팝업에서 closeLayer 버튼 없음")
     except:
-        print("(예외처리) 구매한도초과 팝업에서 closeLayer 버튼 없음")
+        print("예외처리됨")
 
     # 로그아웃
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
