@@ -18,9 +18,6 @@ def run(playwright: Playwright) -> None:
     # Open new page
     page = context.new_page()
 
-    # 로그아웃 (이전 로그인정보 logout)
-    # page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
-
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
 
@@ -69,9 +66,15 @@ def run(playwright: Playwright) -> None:
     # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
 
-    # Click input[name="closeLayer"]
-    page.click("input[name=\"closeLayer\"]")
-    # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
+    try:
+        # Click input[name="closeLayer"]
+        page.click("input[name=\"closeLayer\"]")
+        # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
+    except:
+        print("구매한도초과 팝업시, closeLayer 버튼 없음 (예외처리)")
+
+    # (다음 사용자를 위하여) 로그아웃
+    page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
 
     # ---------------------
     context.close()
