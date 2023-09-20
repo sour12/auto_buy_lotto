@@ -43,14 +43,9 @@ jobs:
         wget https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
         unzip ./chromedriver_linux64.zip           
 
-    - name: Run with User 1      
+    - name: Run Script      
       run: |        
-        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
-        zip output.zip *.png
-
-    - name: Run with User 2
-      run: |        
-        python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
+        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
         zip output.zip *.png
 
     - name: Upload Log as Artifact
