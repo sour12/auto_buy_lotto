@@ -47,7 +47,9 @@ jobs:
     - name: Run Script      
       run: |        
         if [ "$(date '+%u')" -eq 3 ]; then
+          echo "Auto Buy USER #1"
           python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
         elif [ "$(date '+%u')" -eq 5 ]; then
+          echo "Auto Buy USER #2"
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
         fi
