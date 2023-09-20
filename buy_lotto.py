@@ -20,6 +20,7 @@ def run(playwright: Playwright) -> None:
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
+    time.sleep(1)
 
     # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
@@ -35,14 +36,15 @@ def run(playwright: Playwright) -> None:
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
+    time.sleep(1)
 
     # Press Enter
     # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
     with page.expect_navigation():
         page.press("form[name=\"jform\"] >> text=로그인", "Enter")
-    
+
     time.sleep(5)
-    
+
     page.goto(url="https://ol.dhlottery.co.kr/olotto/game/game645.do")    
     # "비정상적인 방법으로 접속하였습니다. 정상적인 PC 환경에서 접속하여 주시기 바랍니다." 우회하기
     page.locator("#popupLayerAlert").get_by_role("button", name="확인").click()
