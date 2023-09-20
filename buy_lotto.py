@@ -10,14 +10,15 @@ USER_PW = sys.argv[2]
 COUNT = 1
 
 def run(playwright: Playwright) -> None:
-    print(USER_ID, USER_PW)
-
     # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
 
     # Open new page
     page = context.new_page()
+
+    # (이전 사용자) 로그아웃
+    page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
@@ -73,9 +74,6 @@ def run(playwright: Playwright) -> None:
         # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
     except:
         print("구매한도초과 팝업시, closeLayer 버튼 없음 (예외처리)")
-
-    # (다음 사용자를 위하여) 로그아웃
-    page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
 
     # ---------------------
     context.close()
