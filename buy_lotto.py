@@ -7,9 +7,10 @@ USER_ID = sys.argv[1]
 USER_PW = sys.argv[2]
 
 # 구매 개수를 설정
-COUNT = 1
+COUNT = 5
 
 def run(playwright: Playwright) -> None:
+
     # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
@@ -19,7 +20,7 @@ def run(playwright: Playwright) -> None:
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
-    
+
     # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
 
