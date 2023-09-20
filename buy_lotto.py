@@ -3,14 +3,10 @@ from datetime import datetime
 import time
 import sys
 
-# 동행복권 아이디와 패스워드를 설정
-USER_ID = sys.argv[1]
-USER_PW = sys.argv[2]
-
 # 구매 개수를 설정
 COUNT = 5
 
-def run(playwright: Playwright) -> None:
+def run(playwright: Playwright, ID, PW) -> None:
     date_str = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # chrome 브라우저를 실행
@@ -28,13 +24,13 @@ def run(playwright: Playwright) -> None:
     page.click("[placeholder=\"아이디\"]")
 
     # Fill [placeholder="아이디"]
-    page.fill("[placeholder=\"아이디\"]", USER_ID)
+    page.fill("[placeholder=\"아이디\"]", ID)
 
     # Press Tab
     page.press("[placeholder=\"아이디\"]", "Tab")
 
     # Fill [placeholder="비밀번호"]
-    page.fill("[placeholder=\"비밀번호\"]", USER_PW)
+    page.fill("[placeholder=\"비밀번호\"]", PW)
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
@@ -87,4 +83,7 @@ def run(playwright: Playwright) -> None:
     browser.close()
 
 with sync_playwright() as playwright:
-    run(playwright)
+    run(playwright, sys.argv[1], sys.argv[2])
+
+with sync_playwright() as playwright:
+    run(playwright, sys.argv[3], sys.argv[4])
