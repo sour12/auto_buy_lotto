@@ -45,11 +45,5 @@ jobs:
 
     - name: Run Script      
       run: |        
-        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
-        zip output.zip *.png
-
-    - name: Upload Log as Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: logs
-        path: output.zip
+        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
+        # python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
