@@ -38,13 +38,16 @@ def run(playwright: Playwright) -> None:
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
+    
+    # Press Enter
+    page.press("form[name=\"jform\"] >> text=로그인", "Enter")    
     page.screenshot(path=date_str + "_2.png")
 
     try:
-        # Press Enter
-        # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
-        with page.expect_navigation():
-            page.press("form[name=\"jform\"] >> text=로그인", "Enter")
+        # # Press Enter
+        # # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
+        # with page.expect_navigation():
+        #     page.press("form[name=\"jform\"] >> text=로그인", "Enter")
     
         time.sleep(5)
     
