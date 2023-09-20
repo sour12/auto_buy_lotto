@@ -45,5 +45,7 @@ jobs:
 
     - name: Run Script      
       run: |        
+        date +%u
+        date
         python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
         # python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
