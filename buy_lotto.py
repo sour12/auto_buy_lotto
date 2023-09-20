@@ -19,7 +19,6 @@ def run(playwright: Playwright) -> None:
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
-    page.screenshot(path="s1.png")
     
     # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
@@ -35,7 +34,6 @@ def run(playwright: Playwright) -> None:
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
-    page.screenshot(path="s2.png")
 
     # Press Enter
     # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
