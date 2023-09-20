@@ -1,14 +1,15 @@
 from playwright.sync_api import Playwright, sync_playwright
-from datetime import datetime
 import time
 import sys
+
+# 동행복권 아이디와 패스워드를 설정
+USER_ID = sys.argv[1]
+USER_PW = sys.argv[2]
 
 # 구매 개수를 설정
 COUNT = 5
 
-def run(playwright: Playwright, ID, PW) -> None:
-    date_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-
+def run(playwright: Playwright) -> None:
     # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
@@ -18,19 +19,18 @@ def run(playwright: Playwright, ID, PW) -> None:
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
-    page.screenshot(path=date_str + "_1.png")
-
+    
     # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
 
     # Fill [placeholder="아이디"]
-    page.fill("[placeholder=\"아이디\"]", ID)
+    page.fill("[placeholder=\"아이디\"]", USER_ID)
 
     # Press Tab
     page.press("[placeholder=\"아이디\"]", "Tab")
 
     # Fill [placeholder="비밀번호"]
-    page.fill("[placeholder=\"비밀번호\"]", PW)
+    page.fill("[placeholder=\"비밀번호\"]", USER_PW)
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
@@ -39,17 +39,16 @@ def run(playwright: Playwright, ID, PW) -> None:
     # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
     with page.expect_navigation():
         page.press("form[name=\"jform\"] >> text=로그인", "Enter")
-
+    
     time.sleep(5)
-
+    
     page.goto(url="https://ol.dhlottery.co.kr/olotto/game/game645.do")    
     # "비정상적인 방법으로 접속하였습니다. 정상적인 PC 환경에서 접속하여 주시기 바랍니다." 우회하기
     page.locator("#popupLayerAlert").get_by_role("button", name="확인").click()
     print(page.content())
-    page.screenshot(path=date_str + "_3.png")
 
     # Click text=자동번호발급
-    page.click("text=자동번호발급")    
+    page.click("text=자동번호발급")
     #page.click('#num2 >> text=자동번호발급')
 
     # 구매할 개수를 선택
@@ -65,7 +64,6 @@ def run(playwright: Playwright, ID, PW) -> None:
     time.sleep(2)
     # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
-    page.screenshot(path=date_str + "_4.png")
 
     try:
         # Click input[name="closeLayer"]
@@ -76,14 +74,10 @@ def run(playwright: Playwright, ID, PW) -> None:
 
     # 로그아웃
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
-    page.screenshot(path=date_str + "_5.png")
 
     # ---------------------
     context.close()
     browser.close()
 
 with sync_playwright() as playwright:
-    run(playwright, sys.argv[1], sys.argv[2])
-
-with sync_playwright() as playwright:
-    run(playwright, sys.argv[3], sys.argv[4])
+    run(playwright)
