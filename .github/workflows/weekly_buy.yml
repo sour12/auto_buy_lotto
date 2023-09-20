@@ -7,7 +7,8 @@ on:
   push:
     branches: [ "main" ]  
   schedule:
-    - cron: '55 23 * * 5' # UST 기준의 크론. UST 23:55 는 KST 08:55
+    - cron: '55 23 * * 3' # UST 23:55(수) > KST 08:55(목)  
+    - cron: '55 23 * * 5' # UST 23:55(금) > KST 08:55(토)
 
 jobs:
   build:
@@ -45,7 +46,8 @@ jobs:
 
     - name: Run Script      
       run: |        
-        date +%u
-        date
-        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
-        # python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
+        if [ "$(date '+%u')" -eq 3 ]; then
+          python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}}
+        elif [ "$(date '+%u')" -eq 5 ]; then
+          python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}}
+        fi
