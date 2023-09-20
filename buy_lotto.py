@@ -70,7 +70,7 @@ def run(playwright: Playwright) -> None:
         page.click("input[name=\"closeLayer\"]")
         # assert page.url == "https://el.dhlottery.co.kr/game/TotalGame.jsp?LottoId=LO40"
     except:
-        print("구매한도초과 팝업시, closeLayer 버튼 없음 (예외처리)")
+        print("(예외처리) 구매한도초과 팝업에서 closeLayer 버튼 없음")
 
     # 로그아웃
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
