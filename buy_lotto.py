@@ -1,4 +1,5 @@
 from playwright.sync_api import Playwright, sync_playwright
+from datetime import datetime
 import time
 import sys
 
@@ -10,6 +11,7 @@ USER_PW = sys.argv[2]
 COUNT = 5
 
 def run(playwright: Playwright) -> None:
+    date_str = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
@@ -20,7 +22,7 @@ def run(playwright: Playwright) -> None:
 
     # Go to https://dhlottery.co.kr/user.do?method=login
     page.goto("https://dhlottery.co.kr/user.do?method=login")
-    time.sleep(1)
+    page.screenshot(path=date_str + "_1.png")
 
     # Click [placeholder="아이디"]
     page.click("[placeholder=\"아이디\"]")
@@ -36,7 +38,7 @@ def run(playwright: Playwright) -> None:
 
     # Press Tab
     page.press("[placeholder=\"비밀번호\"]", "Tab")
-    time.sleep(1)
+    page.screenshot(path=date_str + "_2.png")
 
     # Press Enter
     # with page.expect_navigation(url="https://ol.dhlottery.co.kr/olotto/game/game645.do"):
@@ -49,6 +51,7 @@ def run(playwright: Playwright) -> None:
     # "비정상적인 방법으로 접속하였습니다. 정상적인 PC 환경에서 접속하여 주시기 바랍니다." 우회하기
     page.locator("#popupLayerAlert").get_by_role("button", name="확인").click()
     print(page.content())
+    page.screenshot(path=date_str + "_3.png")
 
     # Click text=자동번호발급
     page.click("text=자동번호발급")
@@ -67,6 +70,7 @@ def run(playwright: Playwright) -> None:
     time.sleep(2)
     # Click text=확인 취소 >> input[type="button"]
     page.click("text=확인 취소 >> input[type=\"button\"]")
+    page.screenshot(path=date_str + "_4.png")
 
     try:
         # Click input[name="closeLayer"]
@@ -77,6 +81,7 @@ def run(playwright: Playwright) -> None:
 
     # 로그아웃
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
+    page.screenshot(path=date_str + "_5.png")
 
     # ---------------------
     context.close()
