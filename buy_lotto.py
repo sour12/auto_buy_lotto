@@ -10,6 +10,7 @@ USER_PW = sys.argv[2]
 COUNT = 1
 
 def run(playwright: Playwright) -> None:
+    print(USER_ID, USER_PW)
 
     # chrome 브라우저를 실행
     browser = playwright.chromium.launch(headless=True)
