@@ -49,11 +49,12 @@ jobs:
     
     - name: Download Lotto Artifact
       uses: actions/download-artifact@v2
-      with:
-        name: auto_lotto
-        path: auto_lotto
+      # with:
+      #   name: auto_lotto
+      #   path: auto_lotto/weekly
       # continue-on-error: true
-
+  
+    - run: ls -al ./
     - run: ls -al ./auto_lotto/weekly
 
     - name: Run Script      
