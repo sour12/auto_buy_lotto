@@ -44,6 +44,14 @@ jobs:
         wget https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
         unzip ./chromedriver_linux64.zip           
 
+    - run: mkdir -p ./lotto
+    
+    - name: Restore cache (if available)
+      uses: actions/cache@v2
+      with:
+        path: ./lotto
+        key: auto_buy_lotto
+
     - name: Run Script      
       run: |
         if [ "$(date '+%u')" -eq 3 ]; then
@@ -51,3 +59,10 @@ jobs:
         elif [ "$(date '+%u')" -eq 5 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
+  
+    - name: Cache the result
+      uses: actions/cache@v2
+      with:
+        path: ./lotto
+        key: auto_buy_lotto
+        restore-keys: auto_buy_lotto
