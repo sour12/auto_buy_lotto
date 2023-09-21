@@ -49,7 +49,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: auto_lotto
-        path: auto_lotto/weekly  
+        path: auto_lotto/weekly/count.log
       continue-on-error: true
 
     - name: Run Script      
