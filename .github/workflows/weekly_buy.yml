@@ -55,11 +55,11 @@ jobs:
 
     - name: Run Script      
       run: |
-        if [ "$(date '+%u')" -eq 4 ]; then
+        if [ "$(date '+%u')" -eq 1 ]; then
           python crawling_lotto.py
-        elif [ "$(date '+%u')" -eq 3 ]; then
-          python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
         elif [ "$(date '+%u')" -eq 5 ]; then
+          python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
+        elif [ "$(date '+%u')" -eq 3 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
   
