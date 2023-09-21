@@ -45,15 +45,6 @@ jobs:
         wget https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
         unzip ./chromedriver_linux64.zip           
 
-    - name: Download Lotto Artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: auto_lotto
-        path: ./
-      continue-on-error: true
-  
-    - run: ls -al ./
-
     - name: Run Script      
       run: |
         if [ "$(date '+%u')" -eq 4 ]; then
@@ -67,9 +58,3 @@ jobs:
           echo "Auto Buy USER #2"
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
-
-    - name: Upload Lotto Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: auto_lotto
-        path: ./lotto_count.log
