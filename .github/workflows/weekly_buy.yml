@@ -7,9 +7,9 @@ on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron: '0 3 * * 1'  # UST  3:00(월) > KST 12:00(월)  
-    - cron: '0 23 * * 3' # UST 23:00(수) > KST 08:00(목)  
-    - cron: '0 23 * * 5' # UST 23:00(금) > KST 08:00(토)
+    # - cron: '0 1 * * 1'  # UST  1:00(월) > KST 10:00(월)  
+    - cron: '0 1 * * 3' # UST  1:00(수) > KST 10:00(수)  
+    - cron: '0 1 * * 5' # UST  1:00(금) > KST 10:00(금)
 
 jobs:
   build:
@@ -47,14 +47,8 @@ jobs:
 
     - name: Run Script      
       run: |
-        if [ "$(date '+%u')" -eq 4 ]; then
-          echo "Crawling Lotto Count"
-          python ./crawling_lotto.py
-          ls -al ./
-        elif [ "$(date '+%u')" -eq 3 ]; then
-          echo "Auto Buy USER #1"
+        if [ "$(date '+%u')" -eq 3 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "auto"
         elif [ "$(date '+%u')" -eq 5 ]; then
-          echo "Auto Buy USER #2"
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
