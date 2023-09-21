@@ -1,6 +1,6 @@
 import requests
 
-FILE_PATH="./auto_lotto/weekly/count.log"
+FILE_PATH="./lotto_count.log"
 
 count_num = {key: 0 for key in range(1, 46)}
 count_bonus = {key: 0 for key in range(1, 46)}
