@@ -9,9 +9,35 @@ USER_PW = sys.argv[2]
 # 크롤링된 번호를 사용 여부 ("auto":미사용, "manual":사용)
 SEL_AUTO = sys.argv[3]
 
+FILE_PATH="./lotto_count.log"
+
 count_num = {key: 0 for key in range(1, 46)}
 count_bonus = {key: 0 for key in range(1, 46)}
 combined_count = {key: 0 for key in range(1, 46)}
+
+def load_lotto_count():
+    rstr=""
+    with open(FILE_PATH, "r") as file:
+        rstr = file.read()
+
+    rstr_split=rstr.split("\n")    
+    count_num_str = rstr_split[1].split(';')
+    count_bonus_str = rstr_split[2].split(';')
+
+    idx=1
+    for val in count_num_str:
+        if (len(count_num_str) != idx):
+            count_num[idx]=int(val)
+        idx+=1
+    idx=1
+    for val in count_bonus_str:
+        if (len(count_bonus_str) != idx):
+            count_bonus[idx]=int(val)
+        idx+=1
+
+    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
+    print("[LOAD] count :", count_num)
+    print("[LOAD] bonus :", count_bonus)
 
 def manual_select(page, num_arr):
     print(num_arr)
@@ -67,6 +93,9 @@ def run(playwright: Playwright) -> None:
     page.goto("https://dhlottery.co.kr/user.do?method=logout&returnUrl=")
     context.close()
     browser.close()
+
+if (SEL_AUTO == "manual"):
+    load_lotto_count()
 
 with sync_playwright() as playwright:
     run(playwright)
