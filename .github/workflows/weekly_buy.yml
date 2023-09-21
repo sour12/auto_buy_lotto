@@ -44,17 +44,20 @@ jobs:
         sudo apt-get install google-chrome-stable    
         wget https://chromedriver.storage.googleapis.com/100.0.4896.20/chromedriver_linux64.zip
         unzip ./chromedriver_linux64.zip           
+
+    - run: mkdir -p ./auto_lotto/weekly
     
     - name: Download Lotto Artifact
       uses: actions/download-artifact@v2
       with:
         name: auto_lotto
+        path: auto_lotto/weekly/count.log
       continue-on-error: true
-    - run: ls -al
+
+    - run: ls -al ./auto_lotto/weekly
 
     - name: Run Script      
       run: |
-        mkdir -p ./auto_lotto/weekly
         if [ "$(date '+%u')" -eq 4 ]; then
           echo "Crawling Lotto Count"
           python ./crawling_lotto.py
