@@ -9,7 +9,7 @@ USER_PW = sys.argv[2]
 # 크롤링된 번호를 사용 여부 ("auto":미사용, "manual":사용)
 SEL_AUTO = sys.argv[3]
 
-FILE_PATH="./lotto_count.log"
+FILE_PATH="./lotto/count.log"
 
 count_num = {key: 0 for key in range(1, 46)}
 count_bonus = {key: 0 for key in range(1, 46)}
