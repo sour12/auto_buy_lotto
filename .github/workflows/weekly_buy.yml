@@ -55,7 +55,7 @@ jobs:
     - name: Run Script      
       run: |
         mkdir -p ./auto_lotto/weekly
-        if [ "$(date '+%u')" -eq 1 ]; then
+        if [ "$(date '+%u')" -eq 4 ]; then
           echo "Crawling Lotto Count"
           python ./crawling_lotto.py
         elif [ "$(date '+%u')" -eq 3 ]; then
