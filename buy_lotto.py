@@ -35,9 +35,10 @@ def load_lotto_count():
             count_bonus[idx]=int(val)
         idx+=1
 
+    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
+
     print("[LOAD] count :", count_num)
     print("[LOAD] bonus :", count_bonus)
-    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
     print("[LOAD] all   :", combined_count)
 
 def manual_select(page, num_arr):
@@ -70,10 +71,10 @@ def run(playwright: Playwright) -> None:
         page.click("text=혼합선택")
         page.select_option("select", str(1))
         # 4회는 번호선택
-        manual_select(page, (sorted(count_num, key=lambda k: count_num[k], reverse=True)[:6]))
-        manual_select(page, (sorted(count_num, key=lambda k: count_num[k])[:6]))
-        manual_select(page, (sorted(combined_count, key=lambda k: combined_count[k])[:6]))
-        manual_select(page, (sorted(combined_count, key=lambda k: combined_count[k], reverse=True)[:6]))
+        manual_select(page, sorted(sorted(count_num, key=lambda k: count_num[k], reverse=True)[:6]))
+        manual_select(page, sorted(sorted(count_num, key=lambda k: count_num[k])[:6]))
+        manual_select(page, sorted(sorted(combined_count, key=lambda k: combined_count[k], reverse=True)[:6]))
+        manual_select(page, sorted(sorted(combined_count, key=lambda k: combined_count[k])[:6]))
         # 1회는 자동선택
         page.click('label:has-text("자동선택")')
         page.click("text=확인")
