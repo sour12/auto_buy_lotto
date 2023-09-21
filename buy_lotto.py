@@ -35,9 +35,10 @@ def load_lotto_count():
             count_bonus[idx]=int(val)
         idx+=1
 
-    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
     print("[LOAD] count :", count_num)
     print("[LOAD] bonus :", count_bonus)
+    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
+    print("[LOAD] all   :", combined_count)
 
 def manual_select(page, num_arr):
     print(num_arr)
