@@ -1,6 +1,6 @@
 import requests
 
-FILE_PATH="./lotto_count.log"
+FILE_PATH="./lotto/count.log"
 
 count_num = {key: 0 for key in range(1, 46)}
 count_bonus = {key: 0 for key in range(1, 46)}
@@ -87,6 +87,6 @@ def save_lotto_count(lcnt):
         print("[SAVE] ", file.read())
 
 
-# ocnt = load_lotto_count()
-ncnt = prediction_lotto(0)
+ocnt = load_lotto_count()
+ncnt = prediction_lotto(ocnt)
 save_lotto_count(ncnt)
