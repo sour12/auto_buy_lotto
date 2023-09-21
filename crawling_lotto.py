@@ -87,6 +87,6 @@ def save_lotto_count(lcnt):
         print("[SAVE] ", file.read())
 
 
-ocnt = load_lotto_count()
-ncnt = prediction_lotto(ocnt)
+# ocnt = load_lotto_count()
+ncnt = prediction_lotto(0)
 save_lotto_count(ncnt)
