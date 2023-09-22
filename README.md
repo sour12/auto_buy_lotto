@@ -2,7 +2,7 @@ GitHub Actions를 사용한 Lotto 번호 선택
 
 이 프로젝트는 GitHub Actions를 활용하여 주기적으로 로또 번호를 선택하는 방법을 보여줍니다. 아래 참고 페이지를 참조하여 크롤링과 GitHub Secrets를 사용한 업데이트를 진행했습니다.
 
-참고 페이지: GitHub Actions를 사용한 Lotto 번호 선택
+참고 페이지: https://velog.io/@king/githubactions-lotto
 
 buy_lotto.py 수정사항
 
