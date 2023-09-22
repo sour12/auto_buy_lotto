@@ -1,8 +1,8 @@
 GitHub Actions를 사용한 Lotto 번호 선택
 
-이 프로젝트는 GitHub Actions를 활용하여 주기적으로 로또 번호를 선택하는 방법을 보여줍니다. 아래 참고 페이지에서 더 자세한 내용을 확인할 수 있습니다.
+이 프로젝트는 GitHub Actions를 활용하여 주기적으로 로또 번호를 선택하는 방법을 보여줍니다. 아래 참고 페이지를 참조하여 크롤링과 GitHub Secrets를 사용한 업데이트를 진행했습니다.
 
-참고 페이지: https://velog.io/@king/githubactions-lotto
+참고 페이지: GitHub Actions를 사용한 Lotto 번호 선택
 
 buy_lotto.py 수정사항
 
@@ -24,3 +24,5 @@ crawling_lotto.py 추가사항
 	•	월요일: crawling_lotto.py 실행하여 로또 번호를 크롤링하고 캐시를 업데이트합니다.
 	•	수요일: buy_lotto.py 실행 (USER #1): 크롤링된 데이터를 기반으로 번호를 선택합니다.
 	•	금요일: buy_lotto.py 실행 (USER #2): 자동으로 번호를 선택합니다.
+
+이 내용을 기반으로 한 리포지토리의 업데이트 내용을 설명해 드렸습니다.
