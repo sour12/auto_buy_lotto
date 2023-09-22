@@ -2,9 +2,8 @@
 
 참고 페이지 : https://velog.io/@king/githubactions-lotto
 
-<참고페이지 대비 변경점>
 [buy_lotto.py 수정사항]
-1. "혼합선택"으로 선택하여, 크롤링된 번호들로 구매 가능  (4번의 조합을 구매에 활용)
+1. "혼합선택"으로 선택가능, 크롤링된 번호들로 선택 가능
 
 [yml 수정사항]
 1. Github의 Secrets을 통해, User ID/PW 인자값 전달되도록 변경 및 여러 사용자들 실행
