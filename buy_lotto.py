@@ -13,7 +13,6 @@ FILE_PATH="./lotto/count.log"
 
 count_num = {key: 0 for key in range(1, 46)}
 count_bonus = {key: 0 for key in range(1, 46)}
-combined_count = {key: 0 for key in range(1, 46)}
 
 def load_lotto_count():
     rstr=""
@@ -35,11 +34,8 @@ def load_lotto_count():
             count_bonus[idx]=int(val)
         idx+=1
 
-    combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
-
     print("[LOAD] count :", count_num)
     print("[LOAD] bonus :", count_bonus)
-    print("[LOAD] all   :", combined_count)
 
 def manual_select(page, num_arr):
     print(num_arr)
@@ -68,6 +64,8 @@ def run(playwright: Playwright) -> None:
     print(page.content())
 
     if (SEL_AUTO == "manual"):
+        # 보너스 번호 포함 딕셔너리 생성
+        combined_count = {key: count_num[key] + count_bonus[key] for key in range(1, 46)}
         page.click("text=혼합선택")
         page.select_option("select", str(1))
         # 4회는 번호선택
