@@ -59,16 +59,13 @@ jobs:
 
     - name: Run Script      
       run: |
-        # if [ "$(date '+%u')" -eq 1 ]; then
-        #   python crawling_lotto.py
-        # elif [ "$(date '+%u')" -eq 3 ]; then
-        #   python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "auto"
-        # elif [ "$(date '+%u')" -eq 5 ]; then
-        #   python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
-        # fi
-        python crawling_lotto.py
-        python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
-
+        if [ "$(date '+%u')" -eq 1 ]; then
+          python crawling_lotto.py
+        elif [ "$(date '+%u')" -eq 3 ]; then
+          python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
+        elif [ "$(date '+%u')" -eq 5 ]; then
+          python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "manual"
+        fi
         
     - name: Delete Previous Cache
       if: ${{ steps.cache-restore.outputs.cache-hit }}
