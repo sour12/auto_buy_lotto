@@ -6,8 +6,8 @@ name: Python package
 on:
   schedule:
     - cron: '30 1 * * 1'  # UTC 1:30(월) > KST 10:30(월)
+    - cron: '30 1 * * 2'  # UTC 1:30(화) > KST 10:30(화)
     - cron: '30 1 * * 3'  # UTC 1:30(수) > KST 10:30(수)  
-    - cron: '30 1 * * 5'  # UTC 1:30(금) > KST 10:30(금)
 
 permissions:
   actions: write
@@ -59,9 +59,9 @@ jobs:
       run: |
         if [ "$(date '+%u')" -eq 1 ]; then
           python crawling_lotto.py
-        elif [ "$(date '+%u')" -eq 3 ]; then
+        elif [ "$(date '+%u')" -eq 2 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
-        elif [ "$(date '+%u')" -eq 5 ]; then
+        elif [ "$(date '+%u')" -eq 3 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
         
