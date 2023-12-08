@@ -61,9 +61,9 @@ jobs:
       run: |
         if [ "$(date '+%u')" -eq 1 ]; then
           python crawling_lotto.py
-        elif [ "$(date '+%u')" -eq 5 ]; then
+        elif [ "$(date '+%u')" -eq 2 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
-        elif [ "$(date '+%u')" -eq 3 ]; then
+        elif [ "$(date '+%u')" -eq 5 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
         
