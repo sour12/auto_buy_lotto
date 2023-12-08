@@ -4,8 +4,8 @@
 name: Weekly Lotto Buy
 
 on:
-  push:
-    branches: [ "main" ]
+#  push:
+#    branches: [ "main" ]
   schedule:
     - cron: '30 1 * * 1'  # UTC 1:30(월) > KST 10:30(월)
     - cron: '30 1 * * 2'  # UTC 1:30(화) > KST 10:30(화)
@@ -63,7 +63,7 @@ jobs:
           python crawling_lotto.py
         elif [ "$(date '+%u')" -eq 2 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "manual"
-        elif [ "$(date '+%u')" -eq 5 ]; then
+        elif [ "$(date '+%u')" -eq 3 ]; then
           python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
         fi
         
