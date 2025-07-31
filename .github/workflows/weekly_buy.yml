@@ -46,3 +46,4 @@ jobs:
           elif [ "$(date '+%u')" -eq 2 ]; then
             python ./buy_lotto.py ${{secrets.USER_ID_2}} ${{secrets.USER_PW_2}} "auto"
           fi
+          python ./buy_lotto.py ${{secrets.USER_ID}} ${{secrets.USER_PW}} "auto"
